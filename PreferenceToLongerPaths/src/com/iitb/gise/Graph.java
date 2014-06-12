@@ -48,7 +48,7 @@ public class Graph {
 			if(n.getNodeType() == Node.SOURCE)
 				n.setTravelTime(0);
 			else
-				n.setTravelTime(Double.MAX_VALUE);
+				n.setTravelTime(Integer.MAX_VALUE);
 		}
 	}
 }

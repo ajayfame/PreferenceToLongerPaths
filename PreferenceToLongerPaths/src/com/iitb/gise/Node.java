@@ -2,10 +2,11 @@ package com.iitb.gise;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import com.javacodegeeks.concurrent.ConcurrentLinkedHashMap;
 
@@ -19,9 +20,15 @@ public class Node implements Comparable<Node> {
 	private String nodeName;
 	private double x;
 	private double y;
+	private Map<Node, Integer> arrivalTimeMap = new LinkedHashMap<Node, Integer>();   
+	//Integer will store arrival time from adjacent nodes
+
+	private Map<Node, Map<Node,Integer>> departureMatrix = new LinkedHashMap<Node, Map<Node,Integer>>();
+	private Map<Node, Node> parentArray = new LinkedHashMap<Node, Node>();
+	
 	private ArrayList<Edge> adjacencies;
 	private Set<Node> childList;
-	private double travelTime;
+	private int travelTime;
 	private Node parent;
 	private PathUptoNode pathUptoPreviousNode;
 	private Map<Node,Integer> adjacentScannedList;
@@ -38,6 +45,54 @@ public class Node implements Comparable<Node> {
 	private Edge edgeTaken = null;
 	private Map<String,IntPair> compareRuns=null;
 	private int occupancyBefore;
+	
+	
+	private void initializeNode()
+	{ 
+		List<Node> list = new ArrayList<Node>(arrivalTimeMap.keySet());
+		for(int i=0; i< list.size() ; i++)
+		{
+			Map<Node,Integer> innerMap = departureMatrix.get(list.get(i));
+			for(int j=0;j<list.size();j++)
+			{
+				if(i==j)
+					continue;
+				innerMap.put(list.get(j), -1);
+			}
+		}
+	}
+	
+	public Map<Node, Integer> getArrivalTimeMap() {
+		return arrivalTimeMap;
+	}
+
+	public void setArrivalTimeMap(Map<Node, Integer> adjacentNodes) {
+		this.arrivalTimeMap = adjacentNodes;
+	}
+
+	public Map<Node, Map<Node, Integer>> getDepartureMatrix() {
+		return departureMatrix;
+	}
+
+	public void setDepartureMatrix(Map<Node, Map<Node, Integer>> departureMatrix) {
+		this.departureMatrix = departureMatrix;
+	}
+
+	public Map<Node, Node> getParentArray() {
+		return parentArray;
+	}
+
+	public void setParentArray(Map<Node, Node> parentArray) {
+		this.parentArray = parentArray;
+	}
+
+	public void setTravelTime(int travelTime) {
+		this.travelTime = travelTime;
+	}
+
+	public int getTravelTime() {
+		return  this.travelTime;
+	}
 	
 	public int getOccupancyBefore() {
 		return occupancyBefore;
@@ -69,14 +124,6 @@ public class Node implements Comparable<Node> {
 
 	public void setAdjacencies(ArrayList<Edge> adjacencies) {
 		this.adjacencies = adjacencies;
-	}
-
-	public double getTravelTime() {
-		return travelTime;
-	}
-
-	public void setTravelTime(double travelTime) {
-		this.travelTime = travelTime;
 	}
 
 	public Set<Node> getChildList() {

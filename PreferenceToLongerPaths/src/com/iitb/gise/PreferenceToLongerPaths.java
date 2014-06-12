@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -108,7 +110,7 @@ public class PreferenceToLongerPaths {
 			srcList.add(node);
 		}
 		else
-			node.setTravelTime(Double.MAX_VALUE);
+			node.setTravelTime(Integer.MAX_VALUE);
 		ArrayList<Integer> nodeCapacityAtTime = new ArrayList<Integer>();
 		nodeCapacityAtTime.add(node.getMaxCapacity());
 		node.setNodeCapacityAtTime(nodeCapacityAtTime);
@@ -139,7 +141,7 @@ public class PreferenceToLongerPaths {
 			srcList.add(node);
 		}
 		else
-			node.setTravelTime(Double.MAX_VALUE);
+			node.setTravelTime(Integer.MAX_VALUE);
 		ArrayList<Integer> nodeCapacityAtTime = new ArrayList<Integer>();
 		nodeCapacityAtTime.add(node.getMaxCapacity());
 		node.setNodeCapacityAtTime(nodeCapacityAtTime);
@@ -191,6 +193,18 @@ public class PreferenceToLongerPaths {
 		edge.setTravelTime(travelTime);
 		edge.setSource(src);
 		edge.setTarget(target);
+	
+		src.getArrivalTimeMap().put(target, -1);
+		target.getArrivalTimeMap().put(src, -1);
+		
+		src.getParentArray().put(target, null );
+		target.getParentArray().put(src, null);
+		
+		Map<Node,Integer> m1 = new LinkedHashMap<Node,Integer>();
+		Map<Node,Integer> m2 = new LinkedHashMap<Node,Integer>();
+		src.getDepartureMatrix().put(target, m1);
+		target.getDepartureMatrix().put(src, m2);
+		
 		
 		EdgeCapacityAtThisTime edgeCapacityAtThisTime = new EdgeCapacityAtThisTime();
 		edge.setEdgeCapacity(new ArrayList<Integer>());
@@ -224,6 +238,17 @@ public class PreferenceToLongerPaths {
 		edge.setSource(src);
 		edge.setTarget(target);
 		
+		src.getArrivalTimeMap().put(target, -1);
+		target.getArrivalTimeMap().put(src, -1);
+		
+		src.getParentArray().put(target, null );
+		target.getParentArray().put(src, null);
+		
+		Map<Node,Integer> m1 = new LinkedHashMap<Node,Integer>();
+		Map<Node,Integer> m2 = new LinkedHashMap<Node,Integer>();
+		src.getDepartureMatrix().put(target, m1);
+		target.getDepartureMatrix().put(src, m2);
+		
 		EdgeCapacityAtThisTime edgeCapacityAtThisTime = new EdgeCapacityAtThisTime();
 		edge.setEdgeCapacity(new ArrayList<Integer>());
 		
@@ -243,7 +268,7 @@ public class PreferenceToLongerPaths {
 		//target.addAdjacentEdge(edge);
 	}
 	
-	public void ccrpPlusPlus()
+	public void preferenceToLongerPaths()
 	{
 		Route.setTotalHops(0);
 		//For each source find the shortest available path to a destination.
@@ -546,7 +571,7 @@ public class PreferenceToLongerPaths {
 			if(n == src)
 				n.setTravelTime(0);
 			else
-				n.setTravelTime(Double.MAX_VALUE);
+				n.setTravelTime(Integer.MAX_VALUE);
 		}
 	}
 	

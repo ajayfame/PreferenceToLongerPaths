@@ -7,13 +7,6 @@ import java.io.IOException;
 
 public class MainProgram {
 	
-	private static CCRPWithReuse1 ccrp;
-	private static BasicCCRP1 basicCCRP;
-	private static BasicCCRP1 basicCCRP2;
-	private static CCRP_PlusPlus1 ccrpPlusPlus;
-	private static KiaCCRP kiaCCRP;
-	private static ShelterBasedCCRP shelterBasedCCRP;
-	private static OneSourceOnePath oneSourceOnePath;
 	private static PreferenceToLongerPaths prefToLongerPaths;
 	
 	static int sum = 0;
@@ -46,11 +39,6 @@ public class MainProgram {
 					nodeType = Node.DESTINATION;
 				else
 					nodeType = Node.NORMAL;
-				ccrp.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
-				basicCCRP.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
-				ccrpPlusPlus.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
-				//shelterBasedCCRP.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
-				oneSourceOnePath.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
 				prefToLongerPaths.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
 				
 			}
@@ -69,11 +57,6 @@ public class MainProgram {
 				int travelTime = (int)Double.parseDouble(stringEdge[4]);
 				int maxCapacity = (int)Double.parseDouble(stringEdge[5]);
 				sum+=maxCapacity;
-				ccrp.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				basicCCRP.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				ccrpPlusPlus.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				//shelterBasedCCRP.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				oneSourceOnePath.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
 				prefToLongerPaths.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
 			}
 		} 
@@ -114,8 +97,7 @@ public class MainProgram {
 			{
 				String[] stringNode = line.split(cvsSplitBy);
 				String nodeName = stringNode[1];
-				int initialOccupancy = (int)Double.parseDouble(stringNode[3]);
-				ccrp.changeNodeCap(nodeName, initialOccupancy);				
+				int initialOccupancy = (int)Double.parseDouble(stringNode[3]);			
 			}
 		} 
 		catch (FileNotFoundException e) 
@@ -168,11 +150,6 @@ public class MainProgram {
 					nodeType = Node.DESTINATION;
 				else
 					nodeType = Node.NORMAL;
-				ccrp.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
-				basicCCRP2.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
-				ccrpPlusPlus.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
-				//shelterBasedCCRP.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
-				oneSourceOnePath.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
 				prefToLongerPaths.addNodeToGraph(nodeId, nodeName, x, y, maxCapacity, initialOccupancy, nodeType);
 			}
 			csvFile = edgeFile;
@@ -190,11 +167,6 @@ public class MainProgram {
 				int travelTime = (int)Double.parseDouble(stringEdge[4]);
 				int maxCapacity = (int)Double.parseDouble(stringEdge[5]);
 				sum+=maxCapacity;
-				ccrp.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				basicCCRP2.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				ccrpPlusPlus.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				//shelterBasedCCRP.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				oneSourceOnePath.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
 				prefToLongerPaths.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
 			}
 		} 
@@ -247,12 +219,6 @@ public class MainProgram {
 					nodeType = Node.DESTINATION;
 				else
 					nodeType = Node.NORMAL;
-				ccrp.addNodeToGraph(nodeId, nodeName, maxCapacity, initialOccupancy, nodeType);
-				kiaCCRP.addNodeToGraph(nodeId, nodeName, maxCapacity, initialOccupancy, nodeType);
-				basicCCRP.addNodeToGraph(nodeId, nodeName, maxCapacity, initialOccupancy, nodeType);
-				ccrpPlusPlus.addNodeToGraph(nodeId, nodeName, maxCapacity, initialOccupancy, nodeType);
-				//shelterBasedCCRP.addNodeToGraph(nodeId, nodeName, maxCapacity, initialOccupancy, nodeType);
-				oneSourceOnePath.addNodeToGraph(nodeId, nodeName, maxCapacity, initialOccupancy, nodeType);
 				prefToLongerPaths.addNodeToGraph(nodeId, nodeName, maxCapacity, initialOccupancy, nodeType);
 			}
 			csvFile = edgeFile;
@@ -270,12 +236,6 @@ public class MainProgram {
 				int travelTime = (int)Double.parseDouble(stringEdge[4]);
 				int maxCapacity = (int)Double.parseDouble(stringEdge[5]);
 				sum+=maxCapacity;
-				ccrp.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				kiaCCRP.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				basicCCRP.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				ccrpPlusPlus.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				//shelterBasedCCRP.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
-				oneSourceOnePath.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
 				prefToLongerPaths.addEdgeToGraph(edgeID, edgeName, sourceName, targetName, maxCapacity, travelTime);
 				
 			}
@@ -304,65 +264,16 @@ public class MainProgram {
 	}
 	public static void main(String args[])
 	{
-		ccrp = new CCRPWithReuse1();
-		kiaCCRP = new KiaCCRP();
-		basicCCRP = new BasicCCRP1();
-		basicCCRP2 = new BasicCCRP1();
-		ccrpPlusPlus = new CCRP_PlusPlus1();
-		shelterBasedCCRP = new ShelterBasedCCRP();
-		oneSourceOnePath = new OneSourceOnePath();
 		prefToLongerPaths = new PreferenceToLongerPaths();
 		String nodeFile = "/Users/MLGupta/Documents/node42.csv";
 		String edgeFile = "/Users/MLGupta/Documents/edge42.csv";
-		//System.out.println("ABC");
-		readNodeAndEdgeFiles(nodeFile, edgeFile, 1);
-		
-		//ccrpPlusPlus.ccrpPlusPlus();
-		System.out.println("average Edge Cap :" + Math.round(1.0*sum/count));
-		//shelterBasedCCRP.modifiedCCRPEvacuationPlanner();
-		//System.out.println("BCD");
-		System.out.println("Modified CCRP");
-		long startTime1 = System.currentTimeMillis();
-		ccrp.runNo=1;
-		ccrp.modifiedCCRPEvacuationPlanner();
-		long endTime1 = System.currentTimeMillis();
-		System.out.println("Running time :" + (endTime1-startTime1) );
-		
-		System.out.println("\n\nRun2");
-		String nodeFile2 = "/Users/MLGupta/Documents/node42.csv";
-		changeNodeCap(nodeFile2);
-		ccrp.runNo=2;
-		ccrp.clearNodeEdgeData();
-		ccrp.modifiedCCRPEvacuationPlanner();
-		
-		System.out.println("\n\n");
-		ccrp.findResults();
-		//ccrp.displayNodeEdgeStats();
-		System.out.println("***********");
-		System.out.println("Basic CCRP");
-		long startTime = System.currentTimeMillis();
-		//basicCCRP.CCRPEvacuationPlanner();
-		nodeFile = "/Users/MLGupta/Documents/node_NoPplInHall.csv";
-		edgeFile = "/Users/MLGupta/Documents/edge.csv";
-		//System.out.println("ABC");
-		//readNodeAndEdgeFiles(nodeFile, edgeFile,"a");
-		//basicCCRP2.setRunNo(1);
-		//basicCCRP2.clearData();
-		//basicCCRP2.CCRPEvacuationPlanner();
 
-		long endTime = System.currentTimeMillis();
-		System.out.println("Running time :" + (endTime-startTime) );
-		//basicCCRP2.displayNodeEdgeStats();
-		System.out.println("***********");
-		System.out.println("CCRP Plus Plus");
-		startTime1 = System.currentTimeMillis();
-		//ccrpPlusPlus.ccrpPlusPlus();
-		endTime1 = System.currentTimeMillis();
-		System.out.println("Running time :" + (endTime1-startTime1) );
-		startTime1 = System.currentTimeMillis();
-		//ccrpPlusPlus.displayNodeEdgeStats();
-		//kiaCCRP.modifiedCCRPEvacuationPlanner();
-		endTime1 = System.currentTimeMillis();
+		readNodeAndEdgeFiles(nodeFile, edgeFile, 1);
+		System.out.println("average Edge Cap :" + Math.round(1.0*sum/count));
+
+		long startTime1 = System.currentTimeMillis();
+		prefToLongerPaths.preferenceToLongerPaths();
+		long endTime1 = System.currentTimeMillis();
 		System.out.println("Running time :" + (endTime1-startTime1) );
 	}
 }
