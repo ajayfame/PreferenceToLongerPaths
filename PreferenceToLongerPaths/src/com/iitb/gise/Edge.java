@@ -6,7 +6,7 @@ public class Edge {
 
 	private Node source;
 	private Node target;
-	private double travelTime;
+	private int travelTime;
 	private int maxIntakeCapacity;
 	private String edgeName;
 	private int edgeID;
@@ -16,22 +16,34 @@ public class Edge {
 	private ArrayList<Boolean> edgeTargetBlocked;
 	private EdgeCapacityAtThisTime edgeMaxCapacityTimeInstance;
 	private int edgeUsage;
-	private ArrayList<Integer> edgeCapacity;
+	private ArrayList<Integer> edgeCapacityAtSrc;
+	private ArrayList<Integer> edgeCapacityAtTarget;
 	private ArrayList<Integer> tempEdgeCapacity;	//array of arrays
 
 	
-	public ArrayList<Integer> getEdgeCapacity() {
-		return edgeCapacity;
+	public ArrayList<Integer> getEdgeCapacityAtSrc() {
+		return edgeCapacityAtSrc;
 	}
 
-	public void setEdgeCapacity(ArrayList<Integer> edgeCapacity) {
-		this.edgeCapacity = edgeCapacity;
-	}
-
-	public void addEdgeCapacity() {
-		this.edgeCapacity.add(maxIntakeCapacity);
+	public void setEdgeCapacityAtSrc(ArrayList<Integer> edgeCapacity) {
+		this.edgeCapacityAtSrc = edgeCapacity;
 	}
 	
+	public ArrayList<Integer> getEdgeCapacityAtTarget() {
+		return edgeCapacityAtTarget;
+	}
+
+	public void setEdgeCapacityAtTarget(ArrayList<Integer> edgeCapacityAtTarget) {
+		this.edgeCapacityAtTarget = edgeCapacityAtTarget;
+	}
+
+	public void addEdgeCapacityAtSrc() {
+		this.edgeCapacityAtSrc.add(maxIntakeCapacity);
+	}
+	
+	public void addEdgeCapacityAtTarget() {
+		this.edgeCapacityAtTarget.add(maxIntakeCapacity);
+	}
 	public ArrayList<Integer> getTempEdgeCapacity() {
 		return tempEdgeCapacity;
 	}
@@ -93,11 +105,11 @@ public class Edge {
 		this.target = target;
 	}
 	
-	public double getTravelTime() {
+	public int getTravelTime() {
 		return travelTime;
 	}
 
-	public void setTravelTime(double travelTime) {
+	public void setTravelTime(int travelTime) {
 		this.travelTime = travelTime;
 	}
 

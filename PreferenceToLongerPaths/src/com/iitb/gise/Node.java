@@ -26,6 +26,7 @@ public class Node implements Comparable<Node> {
 	private Map<Node, Map<Node,Integer>> departureMatrix = new LinkedHashMap<Node, Map<Node,Integer>>();
 	private Map<Node, Node> parentArray = new LinkedHashMap<Node, Node>();
 	
+	private Route routeUptoNode;
 	private ArrayList<Edge> adjacencies;
 	private Set<Node> childList;
 	private int travelTime;
@@ -47,6 +48,15 @@ public class Node implements Comparable<Node> {
 	private int occupancyBefore;
 	
 	
+	
+	public Route getRouteUptoNode() {
+		return routeUptoNode;
+	}
+
+	public void setRouteUptoNode(Route routeUptoNode) {
+		this.routeUptoNode = routeUptoNode;
+	}
+
 	private void initializeNode()
 	{ 
 		List<Node> list = new ArrayList<Node>(arrivalTimeMap.keySet());
@@ -336,6 +346,19 @@ public class Node implements Comparable<Node> {
 		this.childList.add(node);
 	}
 	
+	public int getMinimumArrivalTime()
+	{
+		int min = Integer.MAX_VALUE;
+		List<Integer> arrivalTime = new ArrayList<Integer>(this.getArrivalTimeMap().values());
+		for(int i=0;i<arrivalTime.size();i++)
+		{
+			if(arrivalTime.get(i) < min)
+			{
+				min = arrivalTime.get(i);
+			}
+		}
+		return min;
+	}
 	public void removeChild(Node node)
 	{
 		if(this.childList.contains(node))
