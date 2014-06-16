@@ -15,6 +15,7 @@ public class Route implements Comparable<Route>{
 	ArrayList<Integer> departureTime;
 	ArrayList<Integer> arrivalTime;
 	ArrayList<Integer> capAtDelay;    ///used only for OneSourceOnePath Algorithm
+	int delayAtSrc = 0;
 	int routeId;
 	int groupSize;
 	double routeTravelTime = 0;
@@ -24,6 +25,14 @@ public class Route implements Comparable<Route>{
 	public static double maxLength = 0;
 	
 	
+	public int getDelayAtSrc() {
+		return delayAtSrc;
+	}
+
+	public void setDelayAtSrc(int delayAtSrc) {
+		this.delayAtSrc = delayAtSrc;
+	}
+
 	public void addCapAtDelay(int cap)
 	{
 		if(capAtDelay == null)
@@ -60,6 +69,28 @@ public class Route implements Comparable<Route>{
 		arrivalTime = new ArrayList<Integer>();
 	}
 	
+	public static Route createCopy(Route route)
+	{
+		Route r = new Route();
+		for(int i=0;i<route.getRouteNodeList().size();i++)
+		{
+			r.getRouteNodeList().add(route.getRouteNodeList().get(i));
+		}
+		for(int i=0;i<route.getRouteEdgeList().size();i++)
+		{
+			r.getRouteEdgeList().add(route.getRouteEdgeList().get(i));
+		}
+		for(int i=0;i<route.getDepartureTime().size();i++)
+		{
+			r.getDepartureTime().add(route.getDepartureTime().get(i));
+		}
+		for(int i=0;i<route.getArrivalTime().size();i++)
+		{
+			r.getArrivalTime().add(route.getArrivalTime().get(i));
+		}
+		r.setDelayAtSrc(route.getDelayAtSrc());
+		return r;
+	}
 	public ArrayList<Node> getRouteNodeList() {
 		return routeNodeList;
 	}

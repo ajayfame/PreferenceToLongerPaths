@@ -23,11 +23,13 @@ public class Node implements Comparable<Node> {
 	private Map<Node, Integer> arrivalTimeMap = new LinkedHashMap<Node, Integer>();   
 	//Integer will store arrival time from adjacent nodes
 
+	private Map<Node, Integer> delayAtSrc;
 	private Map<Node, Map<Node,Integer>> departureMatrix = new LinkedHashMap<Node, Map<Node,Integer>>();
 	private Map<Node, Node> parentArray = new LinkedHashMap<Node, Node>();
 	
 	private Route routeUptoNode;
 	private ArrayList<Edge> adjacencies;
+	private ArrayList<Node> adjacentNodes = new ArrayList<Node>();
 	private Set<Node> childList;
 	private int travelTime;
 	private Node parent;
@@ -47,8 +49,22 @@ public class Node implements Comparable<Node> {
 	private Map<String,IntPair> compareRuns=null;
 	private int occupancyBefore;
 	
-	
-	
+	public ArrayList<Node> getAdjacentNodes() {
+		return adjacentNodes;
+	}
+
+	public void setAdjacentNodes(ArrayList<Node> adjacentNodes) {
+		this.adjacentNodes = adjacentNodes;
+	}
+
+	public Map<Node, Integer> getDelayAtSrc() {
+		return delayAtSrc;
+	}
+
+	public void setDelayAtSrc(Map<Node, Integer> delayAtSrc) {
+		this.delayAtSrc = delayAtSrc;
+	}
+
 	public Route getRouteUptoNode() {
 		return routeUptoNode;
 	}
